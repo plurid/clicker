@@ -65,6 +65,11 @@ const Clicker: React.FC<ClickerProperties> = (
 
     // #region state
     const [
+        enabled,
+        setEnabled,
+    ] = useState(false);
+
+    const [
         x,
         setX,
     ] = useState(0);
@@ -101,19 +106,101 @@ const Clicker: React.FC<ClickerProperties> = (
 
     // #region effects
     useEffect(() => {
+        const handleKeydown = (
+            event: KeyboardEvent,
+        ) => {
+            if (event.code === 'KeyC' && event.altKey) {
+                setEnabled(enabled => !enabled);
+                return;
+            }
 
-    }, []);
+            if (!enabled) {
+                return;
+            }
+
+            if (event.code === 'Enter') {
+                console.log('click', x, y);
+                click(x, y);
+                return;
+            }
+
+
+            let speed = 10;
+            if (event.shiftKey) {
+                speed = 50;
+            }
+
+            const update = (
+                kind: 'x' | 'y',
+                value: number,
+                type: 'increase' | 'decrease',
+                speed: number,
+            ) => {
+                let updatedValue = 0;
+                if (type === 'increase') {
+                    updatedValue = value + speed;
+                } else {
+                    updatedValue = value - speed;
+                }
+
+                if (updatedValue < 0) {
+                    return 0;
+                }
+
+                let maxValue = 0;
+                if (kind === 'x') {
+                    maxValue = window.innerWidth;
+                } else {
+                    maxValue = window.innerHeight;
+                }
+
+                if (updatedValue > maxValue) {
+                    return maxValue;
+                }
+
+                return updatedValue;
+            }
+
+            switch (event.code) {
+                case 'ArrowLeft':
+                    setX(value => update('x', value, 'decrease', speed));
+                    break;
+                case 'ArrowRight':
+                    setX(value => update('x', value, 'increase', speed));
+                    break;
+                case 'ArrowUp':
+                    setY(value => update('y', value, 'decrease', speed));
+                    break;
+                case 'ArrowDown':
+                    setY(value => update('x', value, 'increase', speed));
+                    break;
+            }
+        }
+
+        window.addEventListener('keydown', handleKeydown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeydown);
+        }
+    }, [
+        enabled,
+        x, y,
+    ]);
     // #endregion effects
 
 
     // #region render
     return (
-        <StyledClicker
-            color="red"
-            x={x}
-            y={y}
-            size={15}
-        />
+        <>
+            {enabled && (
+                <StyledClicker
+                    color="red"
+                    x={x}
+                    y={y}
+                    size={15}
+                />
+            )}
+        </>
     );
     // #endregion render
 }

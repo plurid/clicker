@@ -60,5 +60,7 @@ export const StyledClicker = styled.div<IStyledClicker>`
             size,
         }) => `calc(${x}px - ${size / 2}px)`
     };
+
+    transition: all 150ms;
 `;
 // #region module
