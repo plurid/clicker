@@ -133,7 +133,6 @@ const Clicker: React.FC<ClickerProperties> = (
             }
 
             if (event.code === 'Enter') {
-                console.log('click', x, y);
                 click(x, y);
                 return;
             }
