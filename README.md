@@ -14,9 +14,9 @@
 </h1>
 
 
-<h1 align="center">
+<h3 align="center">
     In-Browser Keyboard Click
-</h1>
+</h3>
 
 
 
