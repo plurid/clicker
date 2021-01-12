@@ -130,7 +130,7 @@ const Clicker: React.FC<ClickerProperties> = (
 
 
             let speed = 10;
-            if (event.ctrlKey) {
+            if (event.altKey) {
                 speed = 1;
             }
             if (event.shiftKey) {
