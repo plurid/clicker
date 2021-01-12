@@ -32,6 +32,11 @@ export interface ClickerProperties {
 
     // #region optional
         // #region values
+        color?: string;
+        size?: number;
+        round?: boolean;
+        opacity?: number;
+
         className?: string;
         style?: React.CSSProperties
         // #endregion values
@@ -56,6 +61,11 @@ const Clicker: React.FC<ClickerProperties> = (
 
         // #region optional
             // #region values
+            color,
+            size,
+            round,
+            opacity,
+
             className,
             style,
             // #endregion values
@@ -201,10 +211,12 @@ const Clicker: React.FC<ClickerProperties> = (
         <>
             {enabled && (
                 <StyledClicker
-                    color="red"
+                    color={color || 'hsl(220, 20%, 40%)'}
                     x={x}
                     y={y}
-                    size={15}
+                    size={size ?? 15}
+                    round={round}
+                    opacity={opacity}
 
                     className={className}
                     style={{
