@@ -32,6 +32,8 @@ export interface ClickerProperties {
 
     // #region optional
         // #region values
+        className?: string;
+        style?: React.CSSProperties
         // #endregion values
 
         // #region methods
@@ -54,6 +56,8 @@ const Clicker: React.FC<ClickerProperties> = (
 
         // #region optional
             // #region values
+            className,
+            style,
             // #endregion values
 
             // #region methods
@@ -126,6 +130,9 @@ const Clicker: React.FC<ClickerProperties> = (
 
 
             let speed = 10;
+            if (event.ctrlKey) {
+                speed = 1;
+            }
             if (event.shiftKey) {
                 speed = 50;
             }
@@ -198,6 +205,11 @@ const Clicker: React.FC<ClickerProperties> = (
                     x={x}
                     y={y}
                     size={15}
+
+                    className={className}
+                    style={{
+                        ...style,
+                    }}
                 />
             )}
         </>

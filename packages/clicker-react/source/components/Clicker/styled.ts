@@ -19,6 +19,8 @@ export interface IStyledClicker {
 export const StyledClicker = styled.div<IStyledClicker>`
     position: absolute;
     pointer-events: none;
+    transition: all 150ms;
+    z-index: 99999;
 
     background: ${
         ({
@@ -60,7 +62,5 @@ export const StyledClicker = styled.div<IStyledClicker>`
             size,
         }) => `calc(${x}px - ${size / 2}px)`
     };
-
-    transition: all 150ms;
 `;
 // #region module

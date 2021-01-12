@@ -31,11 +31,39 @@ storiesOf(
 .addDecorator(withKnobs)
 .add('Clicker', () => {
 
-    return (
-        <Clicker
-            // {...actions}
+    const buttons = [
+        '1', '2', '3', '4',
+    ];
 
-        />
+    return (
+        <div
+            style={{
+                position: 'relative',
+                height: '100%',
+                background: 'blue',
+            }}
+        >
+            <Clicker
+            />
+
+            {buttons.map(button => {
+                return (
+                    <button
+                        key={button}
+                        style={{
+                            position: 'absolute',
+                            top: Math.random() * window.innerHeight/2 + 40,
+                            left: Math.random() * window.innerWidth/2 + 40,
+                        }}
+                        onClick={() => {
+                            console.log(`button ${button} clicked`);
+                        }}
+                    >
+                        button {button}
+                    </button>
+                );
+            })}
+        </div>
     );
 });
 // #endregion module
