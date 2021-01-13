@@ -7,14 +7,23 @@
     // #endregion libraries
 
 
-    // #region external
-    // #endregion external
-
-
     // #region internal
     import {
+        GlobalClickerStyle,
         StyledClicker,
     } from './styled';
+
+    import {
+        clickerBaseColor,
+        clickerBaseSize,
+
+        clickerBindActivation,
+        clickerBindUp,
+        clickerBindDown,
+        clickerBindLeft,
+        clickerBindRight,
+        clickerBindClick,
+    } from './constants';
     // #endregion internal
 // #region imports
 
@@ -36,6 +45,15 @@ export interface ClickerProperties {
         size?: number;
         round?: boolean;
         opacity?: number;
+        hideCursor?: boolean;
+        followCursor?: boolean;
+
+        bindActivation?: string;
+        bindUp?: string;
+        bindDown?: string;
+        bindLeft?: string;
+        bindRight?: string;
+        bindClick?: string;
 
         className?: string;
         style?: React.CSSProperties
@@ -62,9 +80,18 @@ const Clicker: React.FC<ClickerProperties> = (
         // #region optional
             // #region values
             color,
-            size,
+            size: sizeProperty,
             round,
             opacity,
+            hideCursor,
+            followCursor,
+
+            bindActivation: bindActivationProperty,
+            bindUp: bindUpProperty,
+            bindDown: bindDownProperty,
+            bindLeft: bindLeftProperty,
+            bindRight: bindRightProperty,
+            bindClick: bindClickProperty,
 
             className,
             style,
@@ -74,6 +101,15 @@ const Clicker: React.FC<ClickerProperties> = (
             // #endregion methods
         // #endregion optional
     } = properties;
+
+    const size = sizeProperty || clickerBaseSize;
+
+    const bindActivation = bindActivationProperty || clickerBindActivation;
+    const bindUp = bindUpProperty || clickerBindUp;
+    const bindDown = bindDownProperty || clickerBindDown;
+    const bindLeft = bindLeftProperty || clickerBindLeft;
+    const bindRight = bindRightProperty || clickerBindRight;
+    const bindClick = bindClickProperty || clickerBindClick;
     // #endregion properties
 
 
@@ -95,6 +131,7 @@ const Clicker: React.FC<ClickerProperties> = (
     // #endregion state
 
 
+    // #region handlers
     const click = (
         x: number,
         y: number,
@@ -116,6 +153,7 @@ const Clicker: React.FC<ClickerProperties> = (
         }
         element.dispatchEvent(event);
     }
+    // #endregion handlers
 
 
     // #region effects
@@ -123,7 +161,7 @@ const Clicker: React.FC<ClickerProperties> = (
         const handleKeydown = (
             event: KeyboardEvent,
         ) => {
-            if (event.code === 'KeyC' && event.altKey) {
+            if (event.code === bindActivation && event.altKey) {
                 setEnabled(enabled => !enabled);
                 return;
             }
@@ -132,7 +170,7 @@ const Clicker: React.FC<ClickerProperties> = (
                 return;
             }
 
-            if (event.code === 'Enter') {
+            if (event.code === bindClick) {
                 click(x, y);
                 return;
             }
@@ -178,29 +216,51 @@ const Clicker: React.FC<ClickerProperties> = (
             }
 
             switch (event.code) {
-                case 'ArrowLeft':
-                    setX(value => update('x', value, 'decrease', speed));
-                    break;
-                case 'ArrowRight':
-                    setX(value => update('x', value, 'increase', speed));
-                    break;
-                case 'ArrowUp':
+                case bindUp:
                     setY(value => update('y', value, 'decrease', speed));
                     break;
-                case 'ArrowDown':
+                case bindDown:
                     setY(value => update('x', value, 'increase', speed));
+                    break;
+                case bindLeft:
+                    setX(value => update('x', value, 'decrease', speed));
+                    break;
+                case bindRight:
+                    setX(value => update('x', value, 'increase', speed));
                     break;
             }
         }
 
+        // TODO: debounce
+        const handleFollowCursor = (
+            event: MouseEvent,
+        ) => {
+            setX(event.clientX - size / 2);
+            setY(event.clientY - size / 2);
+        }
+
         window.addEventListener('keydown', handleKeydown);
+
+        if (followCursor) {
+            window.addEventListener('mousemove', handleFollowCursor);
+        }
 
         return () => {
             window.removeEventListener('keydown', handleKeydown);
+
+            if (followCursor) {
+                window.removeEventListener('mousemove', handleFollowCursor);
+            }
         }
     }, [
         enabled,
         x, y,
+        size,
+        followCursor,
+        bindActivation,
+        bindUp, bindDown,
+        bindLeft, bindRight,
+        bindClick,
     ]);
     // #endregion effects
 
@@ -209,19 +269,25 @@ const Clicker: React.FC<ClickerProperties> = (
     return (
         <>
             {enabled && (
-                <StyledClicker
-                    color={color || 'hsl(220, 20%, 40%)'}
-                    x={x}
-                    y={y}
-                    size={size ?? 15}
-                    round={round}
-                    opacity={opacity}
+                <>
+                    <GlobalClickerStyle
+                        hideCursor={hideCursor}
+                    />
 
-                    className={className}
-                    style={{
-                        ...style,
-                    }}
-                />
+                    <StyledClicker
+                        color={color || clickerBaseColor}
+                        x={x}
+                        y={y}
+                        size={size}
+                        round={round}
+                        opacity={opacity}
+
+                        className={className}
+                        style={{
+                            ...style,
+                        }}
+                    />
+                </>
             )}
         </>
     );

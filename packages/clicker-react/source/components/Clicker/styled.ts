@@ -1,6 +1,8 @@
 // #region imports
     // #region libraries
-    import styled from 'styled-components';
+    import styled, {
+        createGlobalStyle,
+    } from 'styled-components';
     // #region libraries
 // #region imports
 
@@ -62,5 +64,21 @@ export const StyledClicker = styled.div<IStyledClicker>`
             size,
         }) => `calc(${x}px - ${size / 2}px)`
     };
+`;
+
+
+
+export interface IGlobalClickerStyle {
+    hideCursor?: boolean;
+}
+
+export const GlobalClickerStyle = createGlobalStyle<IGlobalClickerStyle>`
+    html, body {
+        cursor: ${
+            ({
+                hideCursor
+            }) => hideCursor ? 'none !important': 'auto'
+        };
+    }
 `;
 // #region module
