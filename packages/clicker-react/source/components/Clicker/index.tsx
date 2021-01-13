@@ -19,6 +19,7 @@
 
     import {
         clickerBaseColor,
+        clickerBorder,
         clickerBaseSize,
 
         clickerBindActivation,
@@ -51,6 +52,7 @@ export interface ClickerProperties {
     // #region optional
         // #region values
         color?: string;
+        border?: string;
         size?: number;
         round?: boolean;
         opacity?: number;
@@ -91,6 +93,7 @@ const Clicker: React.FC<ClickerProperties> = (
         // #region optional
             // #region values
             color,
+            border,
             size: sizeProperty,
             round,
             opacity,
@@ -307,12 +310,13 @@ const Clicker: React.FC<ClickerProperties> = (
         <>
             {enabled && (
                 <>
-                    <GlobalClickerStyle
-                        hideCursor={hideCursor}
-                    />
+                    {hideCursor && (
+                        <GlobalClickerStyle />
+                    )}
 
                     <StyledClicker
                         color={color || clickerBaseColor}
+                        border={border || clickerBorder}
                         x={x}
                         y={y}
                         size={size}

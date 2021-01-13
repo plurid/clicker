@@ -1,5 +1,6 @@
 // #region module
 export const clickerBaseColor = 'hsl(220, 20%, 40%)';
+export const clickerBorder = '1px solid hsl(220, 20%, 20%)';
 export const clickerBaseSize = 15;
 
 export const clickerBindActivation = 'KeyC';

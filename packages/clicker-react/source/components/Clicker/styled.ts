@@ -11,6 +11,7 @@
 // #region module
 export interface IStyledClicker {
     color: string;
+    border: string;
     x: number;
     y: number;
     size: number;
@@ -23,12 +24,16 @@ export const StyledClicker = styled.div<IStyledClicker>`
     pointer-events: none;
     transition: all 150ms;
     z-index: 99999;
-    /* border: 1px solid black; */
 
     background: ${
         ({
             color,
         }) => color
+    };
+    border: ${
+        ({
+            border,
+        }) => border
     };
 
     height: ${
@@ -70,16 +75,11 @@ export const StyledClicker = styled.div<IStyledClicker>`
 
 
 export interface IGlobalClickerStyle {
-    hideCursor?: boolean;
 }
 
 export const GlobalClickerStyle = createGlobalStyle<IGlobalClickerStyle>`
     html, body {
-        cursor: ${
-            ({
-                hideCursor
-            }) => hideCursor ? 'none !important': 'auto'
-        };
+        cursor: none !important;
     }
 `;
 // #region module
