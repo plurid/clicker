@@ -502,6 +502,13 @@ const Options: React.FC<OptionsProperties> = () => {
                                 />
                             </StyledOptionsItemLeftRight>
                         </PluridFormline>
+
+                        <PluridFormline
+                            text="speed"
+                            theme={theme}
+                        >
+                            shift/alt + movement keys
+                        </PluridFormline>
                     </StyledUIContainer>
 
                     <div
