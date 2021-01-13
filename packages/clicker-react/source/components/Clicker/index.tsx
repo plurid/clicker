@@ -4,6 +4,10 @@
         useState,
         useEffect,
     } from 'react';
+
+    import {
+        useDebouncedCallback,
+    } from '@plurid/plurid-functions-react';
     // #endregion libraries
 
 
@@ -171,6 +175,16 @@ const Clicker: React.FC<ClickerProperties> = (
 
         element.dispatchEvent(event);
     }
+
+    const handleFollowCursor = useDebouncedCallback(
+        (
+            event: MouseEvent,
+        ) => {
+            setX(event.clientX - size / 2);
+            setY(event.clientY - size / 2);
+        },
+        100,
+    );
     // #endregion handlers
 
 
@@ -250,14 +264,6 @@ const Clicker: React.FC<ClickerProperties> = (
                     setX(value => update('x', value, 'increase', speed));
                     break;
             }
-        }
-
-        // TODO: debounce
-        const handleFollowCursor = (
-            event: MouseEvent,
-        ) => {
-            setX(event.clientX - size / 2);
-            setY(event.clientY - size / 2);
         }
 
         window.addEventListener('keydown', handleKeydown);
