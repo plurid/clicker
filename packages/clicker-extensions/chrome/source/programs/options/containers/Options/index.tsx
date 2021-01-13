@@ -20,6 +20,7 @@
     import Dropdown from '../../../../components/Dropdown';
     import ItemExtensionOnOff from '../../../../components/ItemExtensionOnOff';
     import ButtonCheckmark from '../../../../components/ButtonCheckmark';
+    import ButtonInline from '../../../../components/ButtonInline';
 
     import {
         chromeStorage,
@@ -510,11 +511,9 @@ const Options: React.FC<OptionsProperties> = () => {
                             margin: '40px',
                         }}
                     >
-                        <div
-                            style={{
-                                cursor: 'pointer',
-                            }}
-                            onClick={() => {
+                        <ButtonInline
+                            theme={theme}
+                            atClick={() => {
                                 setColor(defaultOptions.color);
                                 setBorder(defaultOptions.border);
                                 setSize(defaultOptions.size);
@@ -532,7 +531,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             }}
                         >
                             reset to defaults
-                        </div>
+                        </ButtonInline>
                     </div>
                 </StyledOptionsWrapper>
             </StyledOptionsContainer>

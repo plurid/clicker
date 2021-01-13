@@ -4,7 +4,9 @@ import {
     Theme,
 } from '@plurid/plurid-themes';
 
-import ButtonSwitch from '../ButtonSwitch';
+import {
+    universal,
+} from '@plurid/plurid-ui-components-react';
 
 import {
     StyledItemExtensionOnOff,
@@ -12,10 +14,16 @@ import {
 
 
 
+const {
+    inputs: {
+        Switch: PluridSwitch,
+    },
+} = universal;
+
 export interface ItemExtensionOnOffProperties {
     theme: Theme;
-    extensionOnOff: any;
-    setExtensionOnOff: any;
+    extensionOnOff: boolean;
+    setExtensionOnOff: () => void;
 }
 
 const ItemExtensionOnOff: React.FC<ItemExtensionOnOffProperties> = (
@@ -38,10 +46,12 @@ const ItemExtensionOnOff: React.FC<ItemExtensionOnOffProperties> = (
                 clicker is {extensionOnOff ? 'on' : 'off'}
             </div>
 
-            <ButtonSwitch
-                checked={extensionOnOff}
-                toggle={setExtensionOnOff}
+            <PluridSwitch
                 theme={theme}
+                checked={extensionOnOff}
+                atChange={() => setExtensionOnOff()}
+                exclusive={true}
+                level={2}
             />
         </StyledItemExtensionOnOff>
     );
