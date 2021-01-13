@@ -409,7 +409,7 @@ const Options: React.FC<OptionsProperties> = () => {
                                         minWidth: '40px',
                                     }}
                                 >
-                                    ALT +
+                                    alt +
                                 </div>
 
                                 <StyledPluridTextline
@@ -491,7 +491,7 @@ const Options: React.FC<OptionsProperties> = () => {
                                         minWidth: '40px',
                                     }}
                                 >
-                                    ALT +
+                                    alt +
                                 </div>
 
                                 <StyledPluridTextline
