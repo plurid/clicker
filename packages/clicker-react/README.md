@@ -35,7 +35,7 @@
 
 [@plurid/clicker-react][clicker-react] • clicker for `React`
 
-[clicker-react]: https://github.com/plurid/plurid-state/tree/master/packages/clicker-react
+[clicker-react]: https://github.com/plurid/clicker/tree/master/packages/clicker-react
 
 
 
