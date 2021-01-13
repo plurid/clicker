@@ -9,21 +9,16 @@ export const StyledOptions: any = styled.div`
     color: ${(props: any) => {
         return props.theme.colorPrimary;
     }};
+
     height: 500px;
     width: 100%;
     margin: 0px auto;
     user-select: none;
     overflow: hidden;
 
-    /* button {
-        background: ${(props: any) => {
-            return props.theme.backgroundColorSecondary;
-        }};
+    h2 {
+        font-size: 1.4rem;
     }
-
-    a {
-        text-decoration: none;
-    } */
 `;
 
 
@@ -53,21 +48,12 @@ export const StyledOptionsItemLeftRight = styled.div`
 export const StyledStateContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 20px 60px;
 
     margin-top: 20px;
     margin-bottom: 20px;
-
-    h1 {
-        margin: 0px;
-    }
 `;
 
 export const StyledUIContainer = styled.div`
     margin-top: 50px;
     margin-bottom: 20px;
-
-    h1 {
-        margin: 0px;
-    }
 `;

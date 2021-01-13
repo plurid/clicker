@@ -7,6 +7,10 @@
     } from 'react';
 
     import themes from '@plurid/plurid-themes';
+
+    import {
+        universal,
+    } from '@plurid/plurid-ui-components-react';
     // #endregion libraries
 
 
@@ -38,6 +42,18 @@
 
 
 // #region module
+const {
+    form: {
+        FormLeftRight: PluridFormLeftRight,
+        Formline: PluridFormline,
+        Formitem: PluridFormitem,
+    },
+    typography: {
+        Heading: PluridHeading,
+    },
+} = universal;
+
+
 export interface OptionsProperties {
 }
 
@@ -99,9 +115,15 @@ const Options: React.FC<OptionsProperties> = () => {
             <StyledOptionsContainer>
                 <StyledOptionsWrapper>
                     <StyledStateContainer>
-                        <h1>
+                        <PluridHeading
+                            theme={theme}
+                            type="h2"
+                            style={{
+                                padding: '0 0.7rem',
+                            }}
+                        >
                             state
-                        </h1>
+                        </PluridHeading>
 
                         <ItemExtensionOnOff
                             theme={theme}
@@ -110,12 +132,23 @@ const Options: React.FC<OptionsProperties> = () => {
                         />
                     </StyledStateContainer>
 
-                    <StyledUIContainer>
-                        <h1>
-                            interface
-                        </h1>
 
-                        <StyledOptionsItemLeftRight>
+                    <StyledUIContainer>
+                        <PluridHeading
+                            theme={theme}
+                            type="h2"
+                            style={{
+                                padding: '0 0.7rem',
+                            }}
+                        >
+                            interface
+                        </PluridHeading>
+
+                        <PluridFormLeftRight
+                            style={{
+                                padding: '0.3rem 0.7rem',
+                            }}
+                        >
                             <div>
                                 theme
                             </div>
@@ -126,27 +159,107 @@ const Options: React.FC<OptionsProperties> = () => {
                                 items={Object.keys(themes)}
                                 onSelect={setTheme}
                             />
-                        </StyledOptionsItemLeftRight>
+                        </PluridFormLeftRight>
 
-                        <div
-                            style={{
-                                margin: '20px 0'
-                            }}
+                        <PluridFormline
+                            text="color"
                         >
+                            hsl(220, 20%, 40%)
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="size"
+                        >
+                            15
+                        </PluridFormline>
+
+                        <PluridFormitem>
+                            <ButtonCheckmark
+                                checked={true}
+                                text="round"
+                                theme={theme}
+                                toggle={() => {}}
+                            />
+                        </PluridFormitem>
+
+                        <PluridFormline
+                            text="opacity"
+                        >
+                            0.4
+                        </PluridFormline>
+
+                        <PluridFormitem>
                             <ButtonCheckmark
                                 checked={false}
                                 text="hide cursor"
                                 theme={theme}
                                 toggle={() => {}}
                             />
+                        </PluridFormitem>
 
+                        <PluridFormitem>
                             <ButtonCheckmark
                                 checked={false}
                                 text="follow cursor"
                                 theme={theme}
                                 toggle={() => {}}
                             />
-                        </div>
+                        </PluridFormitem>
+                    </StyledUIContainer>
+
+
+                    <StyledUIContainer>
+                        <PluridHeading
+                            theme={theme}
+                            type="h2"
+                            style={{
+                                padding: '0 0.7rem',
+                            }}
+                        >
+                            bindings
+                        </PluridHeading>
+
+                        <PluridFormline
+                            text="activation"
+                        >
+                            ALT + KeyC
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="up"
+                        >
+                            ArrowUp
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="down"
+                        >
+                            ArrowDown
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="left"
+                        >
+                            ArrowLeft
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="right"
+                        >
+                            ArrowRight
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="click"
+                        >
+                            Enter
+                        </PluridFormline>
+
+                        <PluridFormline
+                            text="reset"
+                        >
+                            ALT + KeyR
+                        </PluridFormline>
                     </StyledUIContainer>
                 </StyledOptionsWrapper>
             </StyledOptionsContainer>
