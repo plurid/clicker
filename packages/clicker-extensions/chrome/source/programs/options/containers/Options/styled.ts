@@ -1,6 +1,23 @@
 import styled from 'styled-components';
 
+import {
+    universal,
+} from '@plurid/plurid-ui-components-react';
 
+
+
+const {
+    inputs: {
+        Textline: PluridTextline,
+    },
+} = universal;
+
+
+export const StyledPluridTextline = styled(PluridTextline)`
+    input {
+        text-align: right;
+    }
+`;
 
 export const StyledOptions: any = styled.div`
     background-color: ${(props: any) => {
@@ -40,6 +57,7 @@ export const StyledOptionsWrapper: any = styled.div`
 
 export const StyledOptionsItemLeftRight = styled.div`
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin: 15px 0;
 `;

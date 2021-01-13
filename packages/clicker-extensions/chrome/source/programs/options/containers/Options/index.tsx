@@ -35,6 +35,7 @@
         StyledOptionsItemLeftRight,
         StyledStateContainer,
         StyledUIContainer,
+        StyledPluridTextline,
     } from './styled';
     // #endregion internal
 // #endregion imports
@@ -50,9 +51,6 @@ const {
     },
     typography: {
         Heading: PluridHeading,
-    },
-    inputs: {
-        Textline: PluridTextline,
     },
 } = universal;
 
@@ -163,6 +161,11 @@ const Options: React.FC<OptionsProperties> = () => {
     useEffect(() => {
         const setOptions = async () => {
             const { options } = await chromeStorage.get('options');
+
+            if (!options) {
+                return;
+            }
+
             const {
                 color,
                 border,
@@ -299,7 +302,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="color"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={color}
                                 atChange={(event) => setColor(event.target.value)}
@@ -311,7 +314,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="border"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={border}
                                 atChange={(event) => setBorder(event.target.value)}
@@ -323,7 +326,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="size"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={size}
                                 atChange={(event) => setSize(event.target.value)}
@@ -346,7 +349,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="opacity"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={opacity}
                                 atChange={(event) => setOpacity(event.target.value)}
@@ -394,11 +397,15 @@ const Options: React.FC<OptionsProperties> = () => {
                             theme={theme}
                         >
                             <StyledOptionsItemLeftRight>
-                                <div>
+                                <div
+                                    style={{
+                                        minWidth: '40px',
+                                    }}
+                                >
                                     ALT +
                                 </div>
 
-                                <PluridTextline
+                                <StyledPluridTextline
                                     theme={theme}
                                     text={bindActivation}
                                     atChange={(event) => setBindActivation(event.target.value)}
@@ -411,7 +418,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="up"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={bindUp}
                                 atChange={(event) => setBindUp(event.target.value)}
@@ -423,7 +430,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="down"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={bindDown}
                                 atChange={(event) => setBindDown(event.target.value)}
@@ -435,7 +442,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="left"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={bindLeft}
                                 atChange={(event) => setBindLeft(event.target.value)}
@@ -447,7 +454,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="right"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={bindRight}
                                 atChange={(event) => setBindRight(event.target.value)}
@@ -459,7 +466,7 @@ const Options: React.FC<OptionsProperties> = () => {
                             text="click"
                             theme={theme}
                         >
-                            <PluridTextline
+                            <StyledPluridTextline
                                 theme={theme}
                                 text={bindClick}
                                 atChange={(event) => setBindClick(event.target.value)}
@@ -472,11 +479,15 @@ const Options: React.FC<OptionsProperties> = () => {
                             theme={theme}
                         >
                             <StyledOptionsItemLeftRight>
-                                <div>
+                                <div
+                                    style={{
+                                        minWidth: '40px',
+                                    }}
+                                >
                                     ALT +
                                 </div>
 
-                                <PluridTextline
+                                <StyledPluridTextline
                                     theme={theme}
                                     text={bindReset}
                                     atChange={(event) => setBindReset(event.target.value)}

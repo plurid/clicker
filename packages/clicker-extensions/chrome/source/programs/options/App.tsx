@@ -9,24 +9,11 @@ import {
     chromeStorage,
 } from '../../services/utilities';
 
+import {
+    defaultOptions,
+} from '../../data/constants';
 
 
-const defaultOptions = {
-    color: 'hsl(220, 20%, 40%)',
-    border: '1px solid hsl(220, 20%, 20%)',
-    size: '15',
-    round: true,
-    opacity: '0.4',
-    hideCursor: false,
-    followCursor: false,
-    bindActivation: 'KeyC',
-    bindUp: 'ArrowUp',
-    bindDown: 'ArrowDown',
-    bindLeft: 'ArrowLeft',
-    bindRight: 'ArrowRight',
-    bindClick: 'Enter',
-    bindReset: 'KeyR',
-};
 
 class App extends React.Component<any, any> {
     constructor(props: any) {
@@ -48,21 +35,31 @@ class App extends React.Component<any, any> {
         const selectedTheme = (themes as any)[theme];
 
         const selectedOptions = {
-            color: options.color || defaultOptions.color,
-            border: options.border || defaultOptions.border,
-            size: options.size || defaultOptions.size,
-            round: options.round ?? defaultOptions.round,
-            opacity: options.opacity || defaultOptions.opacity,
-            hideCursor: options.hideCursor ?? defaultOptions.hideCursor,
-            followCursor: options.followCursor ?? defaultOptions.followCursor,
-            bindActivation: options.bindActivation || defaultOptions.bindActivation,
-            bindUp: options.bindUp || defaultOptions.bindUp,
-            bindDown: options.bindDown || defaultOptions.bindDown,
-            bindLeft: options.bindLeft || defaultOptions.bindLeft,
-            bindRight: options.bindRight || defaultOptions.bindRight,
-            bindClick: options.bindClick || defaultOptions.bindClick,
-            bindReset: options.bindReset || defaultOptions.bindReset,
+            color: options?.color ?? defaultOptions.color,
+            border: options?.border ?? defaultOptions.border,
+            size: options?.size ?? defaultOptions.size,
+            round: options?.round ?? defaultOptions.round,
+            opacity: options?.opacity ?? defaultOptions.opacity,
+            hideCursor: options?.hideCursor ?? defaultOptions.hideCursor,
+            followCursor: options?.followCursor ?? defaultOptions.followCursor,
+            bindActivation: options?.bindActivation ?? defaultOptions.bindActivation,
+            bindUp: options?.bindUp ?? defaultOptions.bindUp,
+            bindDown: options?.bindDown ?? defaultOptions.bindDown,
+            bindLeft: options?.bindLeft ?? defaultOptions.bindLeft,
+            bindRight: options?.bindRight ?? defaultOptions.bindRight,
+            bindClick: options?.bindClick ?? defaultOptions.bindClick,
+            bindReset: options?.bindReset ?? defaultOptions.bindReset,
         };
+
+        const { initialOptionsSet } = await chromeStorage.get('initialOptionsSet');
+        if (!initialOptionsSet) {
+            await chromeStorage.set({
+                options: selectedTheme,
+            });
+            await chromeStorage.set({
+                initialOptionsSet: true,
+            });
+        }
 
         if (theme) {
             this.setState({
