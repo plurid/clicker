@@ -168,6 +168,12 @@ const Options: React.FC<OptionsProperties> = () => {
                         </PluridFormline>
 
                         <PluridFormline
+                            text="border"
+                        >
+                            1px solid hsl(220, 20%, 20%)
+                        </PluridFormline>
+
+                        <PluridFormline
                             text="size"
                         >
                             15

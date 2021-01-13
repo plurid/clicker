@@ -33,7 +33,7 @@ export const StyledOptionsContainer: any = styled.div`
 
 
 export const StyledOptionsWrapper: any = styled.div`
-    width: 250px;
+    width: 280px;
     margin: 30px auto;
 `;
 
