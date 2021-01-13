@@ -11,6 +11,23 @@ import {
 
 
 
+const defaultOptions = {
+    color: 'hsl(220, 20%, 40%)',
+    border: '1px solid hsl(220, 20%, 20%)',
+    size: '15',
+    round: true,
+    opacity: '0.4',
+    hideCursor: false,
+    followCursor: false,
+    bindActivation: 'KeyC',
+    bindUp: 'ArrowUp',
+    bindDown: 'ArrowDown',
+    bindLeft: 'ArrowLeft',
+    bindRight: 'ArrowRight',
+    bindClick: 'Enter',
+    bindReset: 'KeyR',
+};
+
 class App extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
@@ -19,6 +36,7 @@ class App extends React.Component<any, any> {
             theme: themes.plurid,
             setTheme: this.setTheme,
             options: {
+                ...defaultOptions,
             },
         };
     }
@@ -29,10 +47,27 @@ class App extends React.Component<any, any> {
 
         const selectedTheme = (themes as any)[theme];
 
+        const selectedOptions = {
+            color: options.color || defaultOptions.color,
+            border: options.border || defaultOptions.border,
+            size: options.size || defaultOptions.size,
+            round: options.round ?? defaultOptions.round,
+            opacity: options.opacity || defaultOptions.opacity,
+            hideCursor: options.hideCursor ?? defaultOptions.hideCursor,
+            followCursor: options.followCursor ?? defaultOptions.followCursor,
+            bindActivation: options.bindActivation || defaultOptions.bindActivation,
+            bindUp: options.bindUp || defaultOptions.bindUp,
+            bindDown: options.bindDown || defaultOptions.bindDown,
+            bindLeft: options.bindLeft || defaultOptions.bindLeft,
+            bindRight: options.bindRight || defaultOptions.bindRight,
+            bindClick: options.bindClick || defaultOptions.bindClick,
+            bindReset: options.bindReset || defaultOptions.bindReset,
+        };
+
         if (theme) {
             this.setState({
                 theme: selectedTheme,
-                options,
+                options: selectedOptions,
             });
         }
     }

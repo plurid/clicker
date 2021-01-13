@@ -51,6 +51,9 @@ const {
     typography: {
         Heading: PluridHeading,
     },
+    inputs: {
+        Textline: PluridTextline,
+    },
 } = universal;
 
 
@@ -58,15 +61,89 @@ export interface OptionsProperties {
 }
 
 const Options: React.FC<OptionsProperties> = () => {
+    // #region properties
     const context: any = useContext(Context);
     const {
         theme,
         setTheme,
+        options,
     } = context;
+    // #endregion properties
 
-    const [extensionOnOff, setExtensionOnOff] = useState(true);
+
+    // #region state
+    const [
+        extensionOnOff,
+        setExtensionOnOff,
+    ] = useState(true);
+
+    const [
+        color,
+        setColor,
+    ] = useState(options.color);
+
+    const [
+        border,
+        setBorder,
+    ] = useState(options.border);
+
+    const [
+        size,
+        setSize,
+    ] = useState(options.size);
+
+    const [
+        round,
+        setRound,
+    ] = useState(options.round as boolean);
+
+    const [
+        opacity,
+        setOpacity,
+    ] = useState(options.opacity);
+
+    const [
+        hideCursor,
+        setHideCursor,
+    ] = useState(options.hideCursor as boolean);
+
+    const [
+        followCursor,
+        setFollowCursor,
+    ] = useState(options.followCursor as boolean);
+
+    const [
+        bindActivation,
+        setBindActivation,
+    ] = useState(options.bindActivation);
+    const [
+        bindUp,
+        setBindUp,
+    ] = useState(options.bindUp);
+    const [
+        bindDown,
+        setBindDown,
+    ] = useState(options.bindDown);
+    const [
+        bindLeft,
+        setBindLeft,
+    ] = useState(options.bindLeft);
+    const [
+        bindRight,
+        setBindRight,
+    ] = useState(options.bindRight);
+    const [
+        bindClick,
+        setBindClick,
+    ] = useState(options.bindClick);
+    const [
+        bindReset,
+        setBindReset,
+    ] = useState(options.bindReset);
+    // #endregion state
 
 
+    // #region effects
     useEffect(() => {
         const getExtensionState = async () => {
             const { extensionOn } = await chromeStorage.get('extensionOn');
@@ -84,18 +161,61 @@ const Options: React.FC<OptionsProperties> = () => {
     }, [extensionOnOff]);
 
     useEffect(() => {
-        const saveOptions = async () => {
+        const setOptions = async () => {
             const { options } = await chromeStorage.get('options');
             const {
+                color,
+                border,
+                size,
+                round,
+                opacity,
+                hideCursor,
+                followCursor,
+                bindActivation,
+                bindUp,
+                bindDown,
+                bindLeft,
+                bindRight,
+                bindClick,
+                bindReset,
             } = options;
+
+            setColor(color);
+            setBorder(border);
+            setSize(size);
+            setRound(round);
+            setOpacity(opacity);
+            setHideCursor(hideCursor);
+            setFollowCursor(followCursor);
+            setBindActivation(bindActivation);
+            setBindUp(bindUp);
+            setBindDown(bindDown);
+            setBindLeft(bindLeft);
+            setBindRight(bindRight);
+            setBindClick(bindClick);
+            setBindReset(bindReset);
         }
 
-        saveOptions();
+        setOptions();
     }, []);
 
     useEffect(() => {
         const saveOptions = async () => {
             const options = {
+                color,
+                border,
+                size,
+                round,
+                opacity,
+                hideCursor,
+                followCursor,
+                bindActivation,
+                bindUp,
+                bindDown,
+                bindLeft,
+                bindRight,
+                bindClick,
+                bindReset,
             };
 
             await chromeStorage.set({options});
@@ -103,11 +223,25 @@ const Options: React.FC<OptionsProperties> = () => {
 
         saveOptions();
     }, [
+        color,
+        border,
+        size,
+        round,
+        opacity,
+        hideCursor,
+        followCursor,
+        bindActivation,
+        bindUp,
+        bindDown,
+        bindLeft,
+        bindRight,
+        bindClick,
+        bindReset,
     ]);
+    // #endregion effects
 
-    useEffect(() => {
-    }, []);
 
+    // #region render
     return (
         <StyledOptions
             theme={theme}
@@ -163,52 +297,82 @@ const Options: React.FC<OptionsProperties> = () => {
 
                         <PluridFormline
                             text="color"
+                            theme={theme}
                         >
-                            hsl(220, 20%, 40%)
+                            <PluridTextline
+                                theme={theme}
+                                text={color}
+                                atChange={(event) => setColor(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="border"
+                            theme={theme}
                         >
-                            1px solid hsl(220, 20%, 20%)
+                            <PluridTextline
+                                theme={theme}
+                                text={border}
+                                atChange={(event) => setBorder(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="size"
+                            theme={theme}
                         >
-                            15
+                            <PluridTextline
+                                theme={theme}
+                                text={size}
+                                atChange={(event) => setSize(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
-                        <PluridFormitem>
+                        <PluridFormitem
+                            theme={theme}
+                        >
                             <ButtonCheckmark
-                                checked={true}
+                                checked={round}
                                 text="round"
                                 theme={theme}
-                                toggle={() => {}}
+                                toggle={() => setRound(round => !round)}
                             />
                         </PluridFormitem>
 
                         <PluridFormline
                             text="opacity"
+                            theme={theme}
                         >
-                            0.4
+                            <PluridTextline
+                                theme={theme}
+                                text={opacity}
+                                atChange={(event) => setOpacity(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
-                        <PluridFormitem>
+                        <PluridFormitem
+                            theme={theme}
+                        >
                             <ButtonCheckmark
-                                checked={false}
+                                checked={hideCursor}
                                 text="hide cursor"
                                 theme={theme}
-                                toggle={() => {}}
+                                toggle={() => setHideCursor(show => !show)}
                             />
                         </PluridFormitem>
 
-                        <PluridFormitem>
+                        <PluridFormitem
+                            theme={theme}
+                        >
                             <ButtonCheckmark
-                                checked={false}
+                                checked={followCursor}
                                 text="follow cursor"
                                 theme={theme}
-                                toggle={() => {}}
+                                toggle={() => setFollowCursor(show => !show)}
                             />
                         </PluridFormitem>
                     </StyledUIContainer>
@@ -227,50 +391,105 @@ const Options: React.FC<OptionsProperties> = () => {
 
                         <PluridFormline
                             text="activation"
+                            theme={theme}
                         >
-                            ALT + KeyC
+                            <StyledOptionsItemLeftRight>
+                                <div>
+                                    ALT +
+                                </div>
+
+                                <PluridTextline
+                                    theme={theme}
+                                    text={bindActivation}
+                                    atChange={(event) => setBindActivation(event.target.value)}
+                                    level={2}
+                                />
+                            </StyledOptionsItemLeftRight>
                         </PluridFormline>
 
                         <PluridFormline
                             text="up"
+                            theme={theme}
                         >
-                            ArrowUp
+                            <PluridTextline
+                                theme={theme}
+                                text={bindUp}
+                                atChange={(event) => setBindUp(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="down"
+                            theme={theme}
                         >
-                            ArrowDown
+                            <PluridTextline
+                                theme={theme}
+                                text={bindDown}
+                                atChange={(event) => setBindDown(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="left"
+                            theme={theme}
                         >
-                            ArrowLeft
+                            <PluridTextline
+                                theme={theme}
+                                text={bindLeft}
+                                atChange={(event) => setBindLeft(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="right"
+                            theme={theme}
                         >
-                            ArrowRight
+                            <PluridTextline
+                                theme={theme}
+                                text={bindRight}
+                                atChange={(event) => setBindRight(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="click"
+                            theme={theme}
                         >
-                            Enter
+                            <PluridTextline
+                                theme={theme}
+                                text={bindClick}
+                                atChange={(event) => setBindClick(event.target.value)}
+                                level={2}
+                            />
                         </PluridFormline>
 
                         <PluridFormline
                             text="reset"
+                            theme={theme}
                         >
-                            ALT + KeyR
+                            <StyledOptionsItemLeftRight>
+                                <div>
+                                    ALT +
+                                </div>
+
+                                <PluridTextline
+                                    theme={theme}
+                                    text={bindReset}
+                                    atChange={(event) => setBindReset(event.target.value)}
+                                    level={2}
+                                />
+                            </StyledOptionsItemLeftRight>
                         </PluridFormline>
                     </StyledUIContainer>
                 </StyledOptionsWrapper>
             </StyledOptionsContainer>
         </StyledOptions>
     );
+    // #endregion render
 }
 // #endregion module
 
