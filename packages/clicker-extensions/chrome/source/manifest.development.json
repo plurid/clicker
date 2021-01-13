@@ -12,7 +12,6 @@
         "128" : "assets/icons/icon128.png"
     },
     "permissions": [
-        "contextMenus",
         "storage"
     ],
     "content_scripts": [{
