@@ -24,6 +24,10 @@
     import {
         chromeStorage,
     } from '../../../../services/utilities';
+
+    import {
+        defaultOptions,
+    } from '../../../../data/constants';
     // #endregion external
 
 
@@ -156,7 +160,9 @@ const Options: React.FC<OptionsProperties> = () => {
             await chromeStorage.set({extensionOn: extensionOnOff});
         }
         setExtensionState();
-    }, [extensionOnOff]);
+    }, [
+        extensionOnOff,
+    ]);
 
     useEffect(() => {
         const setOptions = async () => {
@@ -475,7 +481,7 @@ const Options: React.FC<OptionsProperties> = () => {
                         </PluridFormline>
 
                         <PluridFormline
-                            text="reset"
+                            text="reset clicker"
                             theme={theme}
                         >
                             <StyledOptionsItemLeftRight>
@@ -496,6 +502,38 @@ const Options: React.FC<OptionsProperties> = () => {
                             </StyledOptionsItemLeftRight>
                         </PluridFormline>
                     </StyledUIContainer>
+
+                    <div
+                        style={{
+                            display: 'grid',
+                            placeContent: 'center',
+                            margin: '40px',
+                        }}
+                    >
+                        <div
+                            style={{
+                                cursor: 'pointer',
+                            }}
+                            onClick={() => {
+                                setColor(defaultOptions.color);
+                                setBorder(defaultOptions.border);
+                                setSize(defaultOptions.size);
+                                setRound(defaultOptions.round);
+                                setOpacity(defaultOptions.opacity);
+                                setHideCursor(defaultOptions.hideCursor);
+                                setFollowCursor(defaultOptions.followCursor);
+                                setBindActivation(defaultOptions.bindActivation);
+                                setBindUp(defaultOptions.bindUp);
+                                setBindDown(defaultOptions.bindDown);
+                                setBindLeft(defaultOptions.bindLeft);
+                                setBindRight(defaultOptions.bindRight);
+                                setBindClick(defaultOptions.bindClick);
+                                setBindReset(defaultOptions.bindReset);
+                            }}
+                        >
+                            reset to defaults
+                        </div>
+                    </div>
                 </StyledOptionsWrapper>
             </StyledOptionsContainer>
         </StyledOptions>
