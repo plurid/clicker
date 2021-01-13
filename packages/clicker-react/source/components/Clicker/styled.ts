@@ -19,7 +19,7 @@ export interface IStyledClicker {
 }
 
 export const StyledClicker = styled.div<IStyledClicker>`
-    position: absolute;
+    position: fixed;
     pointer-events: none;
     transition: all 150ms;
     z-index: 99999;

@@ -23,7 +23,11 @@
         clickerBindLeft,
         clickerBindRight,
         clickerBindClick,
-    } from './constants';
+    } from './data/constants';
+
+    import {
+        ClickData,
+    } from './data/interfaces';
     // #endregion internal
 // #region imports
 
@@ -60,6 +64,7 @@ export interface ClickerProperties {
         // #endregion values
 
         // #region methods
+        beforeClick?: (data: ClickData) => void;
         // #endregion methods
     // #endregion optional
 }
@@ -98,6 +103,7 @@ const Clicker: React.FC<ClickerProperties> = (
             // #endregion values
 
             // #region methods
+            beforeClick,
             // #endregion methods
         // #endregion optional
     } = properties;
@@ -122,12 +128,12 @@ const Clicker: React.FC<ClickerProperties> = (
     const [
         x,
         setX,
-    ] = useState(0);
+    ] = useState(window.innerWidth / 2);
 
     const [
         y,
         setY,
-    ] = useState(0);
+    ] = useState(window.innerHeight / 2);
     // #endregion state
 
 
@@ -135,9 +141,13 @@ const Clicker: React.FC<ClickerProperties> = (
     const click = (
         x: number,
         y: number,
+        type?: 'click' | 'right-click',
     ) => {
         const event = document.createEvent('MouseEvent');
         const element = document.elementFromPoint(x, y);
+
+        // TODO: not working
+        const buttonType = type === 'right-click' ? 2 : 0;
 
         event.initMouseEvent(
             'click',
@@ -145,12 +155,20 @@ const Clicker: React.FC<ClickerProperties> = (
             window, 0 /** null */,
             x, y, 0, 0, /* coordinates */
             false, false, false, false, /* modifier keys */
-            0 /*left*/, null
+            buttonType, null,
         );
 
         if (!element) {
             return;
         }
+
+        if (beforeClick) {
+            beforeClick({
+                x,
+                y,
+            });
+        }
+
         element.dispatchEvent(event);
     }
     // #endregion handlers
@@ -171,7 +189,10 @@ const Clicker: React.FC<ClickerProperties> = (
             }
 
             if (event.code === bindClick) {
-                click(x, y);
+                click(
+                    x, y,
+                    event.shiftKey ? 'right-click' : 'click'
+                );
                 return;
             }
 

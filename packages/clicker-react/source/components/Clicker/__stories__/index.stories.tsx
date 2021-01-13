@@ -79,8 +79,12 @@ storiesOf(
                             top: Math.random() * window.innerHeight / 2 + 40,
                             left: Math.random() * window.innerWidth / 2 + 40,
                         }}
-                        onClick={() => {
+                        onClick={(event) => {
+                            console.log(event);
                             console.log(`button ${button} clicked`);
+                        }}
+                        onContextMenu={() => {
+                            console.log(`button ${button} right clicked`);
                         }}
                     >
                         button {button}
