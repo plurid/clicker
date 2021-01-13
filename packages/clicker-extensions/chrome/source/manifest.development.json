@@ -4,7 +4,7 @@
     "short_name" : "Clicker",
     "description": "In-Browser Keyboard Click",
     "author": "Plurid, Inc.",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "icons" : {
         "16" : "assets/icons/icon16.png",
         "32" : "assets/icons/icon32.png",
