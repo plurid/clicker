@@ -13,7 +13,7 @@ const extractExtensionData = () => {
     const extPackageJson = require('../package.json');
 
     return {
-        name: 'enhanced-image-chrome',
+        name: 'clicker-chrome',
         version: extPackageJson.version
     };
 }
