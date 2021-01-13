@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "name": "Clicker",
+    "short_name" : "Clicker",
+    "description": "In-Browser Keyboard Click",
+    "author": "Plurid, Inc.",
+    "version": "0.0.0",
+    "icons" : {
+        "16" : "assets/icons/icon16.png",
+        "32" : "assets/icons/icon32.png",
+        "48" : "assets/icons/icon48.png",
+        "128" : "assets/icons/icon128.png"
+    },
+    "permissions": [
+        "contextMenus",
+        "storage"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "<all_urls>"
+        ],
+        "js": [
+            "contentscript.js"
+        ],
+        "run_at": "document_idle"
+    }],
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
+    "browser_action" : {
+        "default_title" : "Clicker",
+        "default_icon" : "assets/icons/icon.png",
+        "default_popup" : "popup.html"
+    },
+    "incognito": "spanning",
+    "content_security_policy": "script-src 'self'; object-src 'self'"
+}
