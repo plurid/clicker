@@ -20,7 +20,10 @@ const base = {
         options: './source/programs/options/index.tsx',
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx"]
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
+        alias: {
+            crypto: false,
+        },
     },
     output: {
         publicPath: '',
