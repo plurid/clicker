@@ -27,6 +27,7 @@
         clickerBindLeft,
         clickerBindRight,
         clickerBindClick,
+        clickerBindReset,
     } from './data/constants';
 
     import {
@@ -62,6 +63,7 @@ export interface ClickerProperties {
         bindLeft?: string;
         bindRight?: string;
         bindClick?: string;
+        bindReset?: string;
 
         className?: string;
         style?: React.CSSProperties
@@ -101,6 +103,7 @@ const Clicker: React.FC<ClickerProperties> = (
             bindLeft: bindLeftProperty,
             bindRight: bindRightProperty,
             bindClick: bindClickProperty,
+            bindReset: bindResetProperty,
 
             className,
             style,
@@ -120,6 +123,7 @@ const Clicker: React.FC<ClickerProperties> = (
     const bindLeft = bindLeftProperty || clickerBindLeft;
     const bindRight = bindRightProperty || clickerBindRight;
     const bindClick = bindClickProperty || clickerBindClick;
+    const bindReset = bindResetProperty || clickerBindReset;
     // #endregion properties
 
 
@@ -132,12 +136,12 @@ const Clicker: React.FC<ClickerProperties> = (
     const [
         x,
         setX,
-    ] = useState(window.innerWidth / 2);
+    ] = useState(window.innerWidth / 2 - size / 2);
 
     const [
         y,
         setY,
-    ] = useState(window.innerHeight / 2);
+    ] = useState(window.innerHeight / 2 - size / 2);
     // #endregion state
 
 
@@ -207,6 +211,12 @@ const Clicker: React.FC<ClickerProperties> = (
                     x, y,
                     event.shiftKey ? 'right-click' : 'click'
                 );
+                return;
+            }
+
+            if (event.code === bindReset && event.altKey) {
+                setX(window.innerWidth / 2 - size / 2);
+                setY(window.innerHeight / 2 - size / 2);
                 return;
             }
 

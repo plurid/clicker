@@ -8,4 +8,5 @@ export const clickerBindDown = 'ArrowDown';
 export const clickerBindLeft = 'ArrowLeft';
 export const clickerBindRight = 'ArrowRight';
 export const clickerBindClick = 'Enter';
+export const clickerBindReset = 'KeyR';
 // #endregion module
