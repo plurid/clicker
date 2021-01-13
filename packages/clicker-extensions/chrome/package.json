@@ -6,7 +6,7 @@
         "clicker"
     ],
     "author": "ly3xqhl8g9 <ly3xqhl8g9@plurid.com> (https://plurid.com)",
-    "license": "MIT",
+    "license": "SEE LICENSE IN LICENSE",
     "private": true,
     "repository": {
         "type": "git",
@@ -17,9 +17,6 @@
         "url": "https://github.com/plurid/clicker/issues"
     },
     "homepage": "https://plurid.com",
-    "files": [
-        "distribution/"
-    ],
     "scripts": {
         "e2e-test": "jest __e2e-tests__ --runInBand --silent",
         "unit-test": "jest __tests__/.*.spec.js --silent",
