@@ -1163,10 +1163,10 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@plurid/clicker-react@^0.0.0-0":
-  version "0.0.0-0"
-  resolved "https://registry.yarnpkg.com/@plurid/clicker-react/-/clicker-react-0.0.0-0.tgz#055aa9a8bb5bb87b444fe33b60f04a8d121c5697"
-  integrity sha512-aMI0LQF3TNsvcDIeHvq7qc95Hq2kgjBkuoRjhw6UZorGRCAfrZ8lYQUz6qTORbOCNcD/ZZQvv1yYYY2b998Vpg==
+"@plurid/clicker-react@^0.0.0-1":
+  version "0.0.0-1"
+  resolved "https://registry.yarnpkg.com/@plurid/clicker-react/-/clicker-react-0.0.0-1.tgz#769b09285fb0a1ee8ab5d515258d9512758eee16"
+  integrity sha512-8UEaMnMDxR1/lFP/WpNGhXBlfKAdEu+TKrvqNYd8Z09ukFsFnIptxlOGeWqOpFJYWLDie0Txocoq8Pk2SV9gZw==
 
 "@plurid/plurid-functions-react@^0.0.0-0":
   version "0.0.0-0"
