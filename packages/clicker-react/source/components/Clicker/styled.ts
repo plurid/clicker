@@ -23,6 +23,7 @@ export const StyledClicker = styled.div<IStyledClicker>`
     pointer-events: none;
     transition: all 150ms;
     z-index: 99999;
+    /* border: 1px solid black; */
 
     background: ${
         ({

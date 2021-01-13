@@ -49,8 +49,9 @@ storiesOf(
         <div
             style={{
                 position: 'relative',
-                height: '100%',
-                background: 'blue',
+                // height: '100%',
+                height: '4500px',
+                background: '#708090',
             }}
         >
             <Clicker
@@ -76,7 +77,8 @@ storiesOf(
                         key={button}
                         style={{
                             position: 'absolute',
-                            top: Math.random() * window.innerHeight / 2 + 40,
+                            // top: Math.random() * window.innerHeight / 2 + 40,
+                            top: Math.random() * 4400,
                             left: Math.random() * window.innerWidth / 2 + 40,
                         }}
                         onClick={(event) => {
